@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Algoritmos de Ordenamiento</title>
+    <meta charset="UTF-8">
+    </head>
+    
+<body>
+    <div  id="info">
+        <h2>Clasificacion por Seleccion</h2>
+        <div id="rr">
+            <p class="text">Tal vez uno de los métodos de clasificación m ás simples que pueda haber es un algoritmo
+                llamado «clasificación de burbuja» (bubblesort). La idea básica de la clasificación
+                de burbuja es imaginar que los registros a ordenar están almacenados en
+                un arreglo v</p></div>
+        <input id="bb" name="iniciar"class="btn btn-primary" type="button" value="Iniciar">
+    </div>
+    <div >
+        <canvas id="demoCanvas" width="1000" height="700"></canvas>
+    </div>
+    
+    <script>
+        $("#info input[name='iniciar']").click(function(event) {$("#rr").remove();
+                                                                $("#bb").remove();
+                                                                ineit();});
+        var stage = new createjs.Stage("demoCanvas");
+        var circle;
+        var text;
+        var numtxt;
+        var txti;
+        var txtj;
+        var figuras=[];
+        var datos = [];
+        var Estados =[];
+        
+        function ineit() {
+            var x = 72;
+            var y = 300;
+            datos.push("Pelee");
+            datos.push("Etna");
+            datos.push("Krakatoa");
+            datos.push("Augung");
+            datos.push("Vesubio");
+            datos.push("Santa Elena");
+            
+            txti = new createjs.Text("i=1", "40px Arial", "#983545");
+            txtj = new createjs.Text("j=1", "40px Arial", "#983545");
+            txti.textBaseline = "alphabetic";
+            txtj.textBaseline = "alphabetic";
+            txti.x = 100;
+            txti.y = 500;
+            txtj.x = 400;
+            txtj.y = 500;
+            stage.addChild(txti, txtj);
+            for(i=0; i<6; i++){
+                circle = new createjs.Shape();
+                circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 70);
+                text = new createjs.Text(datos[i], "20px Arial", "#ffffff");
+                numtxt = new createjs.Text(i+1, "40px Arial", "#983545");
+                circle.x = x;
+                circle.y = y;
+                text.x = circle.x-60;
+                text.y = circle.y;
+                numtxt.x = circle.x;
+                numtxt.y = circle.y-100;
+                text.textBaseline = "alphabetic";
+                numtxt.textBaseline = "alphabetic";
+                figuras.push({circle,text});
+                stage.addChild(figuras[i].text, numtxt);
+                stage.addChildAt(figuras[i].circle,0);
+                
+                x+=150;
+            }
+            stage.update();
+            sort();
+        }
+        
+        function sort(){
+            var n = datos.length;
+            var temp;
+            var tempf;
+            
+            for (var i=0; i < n; i++) {
+                Estados.push(function (i) {return function () {
+                    $("#code").load("/code/ss/origBBS.html");
+                    txti.text ="i = "+ (i+1);
+                }}(i));
+                for (var j = i+1; j <n; j++) {
+                    Estados.push(function (j) {return function () {
+                    $("#code").load("/code/ss/origBBS.html");
+                    txtj.text ="j = "+ (j+1);
+                }}(j));
+                    Estados.push( function (j) {return function () {
+                        if(datos[j].charCodeAt(0) < datos[j-1].charCodeAt(0) ){
+                            $("#code").load("/code/ss/bbintercambia.html");
+                            createjs.Tween.get(figuras[j].circle, {loop: false}, null, false)
+                                .to({x: figuras[j-1].circle.x, y: figuras[j-1].circle.y, alpha: 1}, 1000, createjs.Ease.get(1)).wait(500);
+                            createjs.Tween.get(figuras[j].text, {loop: false}, null, false)
+                                .to({x: figuras[j-1].circle.x-60, y: figuras[j-1].circle.y, alpha: 1}, 1000, createjs.Ease.get(1)).wait(500);
+                            createjs.Tween.get(figuras[j-1].circle, {loop: false}, null, false)
+                                .to({x: figuras[j].circle.x, y: figuras[j].circle.y, alpha: 1}, 1000, createjs.Ease.get(1)).wait(500);
+                            createjs.Tween.get(figuras[j-1].text, {loop: false}, null, false)
+                                .to({x: figuras[j].circle.x-60, y: figuras[j].circle.y, alpha: 1}, 1000, createjs.Ease.get(1)).wait(500);
+                            createjs.Ticker.addEventListener("tick", stage);
+                            
+                            temp = datos[j];
+                            tempf = figuras[j];
+                            datos[j] = datos[j-1];
+                            datos[j-1] =temp;
+                            figuras[j] = figuras[j-1];
+                            figuras[j-1] = tempf;
+                        }else{
+                            $("#code").load("/code/ss/bbciclo2.html");
+                        }
+                    }}(j));
+                }
+            }
+            iniciar();
+        }
+        function iniciar(){
+            if(Estados.length > 0){
+                setTimeout(function () {
+                    Estados.shift().apply();
+                    iniciar();
+                }, 500);
+            }
+        } 
+    
+</script>
+    </body>
+</html>

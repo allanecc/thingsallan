@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Algoritmos de Ordenamiento</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/pretify.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="./js/jquery.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/burbuja.js"></script>
+    <script src="./js/easeljs-NEXT.min.js"></script>
+    <script src="./js/tweenjs-NEXT.combined.js"></script>
+    </head>
+<body >
+<div class="container-fluid box">
+   <div class="row">
+    <div class="">
+        <label ><h3>Seleccione el tipo de Clasificacion</h3></label>
+        <div class="radio">
+            <label id="radio1"><input type="radio" name="optRadio"> Clasificacion por burbuja    </label>  
+            <label id="radio2"><input type="radio" name="optRadio"> Clasificacion por Insercion  </label>
+            <label id="radio3"><input type="radio" name="optRadio"> Clasificacion por Seleccion  </label>
+        </div>
+       </div>
+       <div class="row ">
+        <div id="grafico" class="col-md-7 ">
+        </div>
+        <div id="code" class="col-md-5 box "></div>
+       </div>
+    </div >
+    </div>
+    
+    <script>
+        $("#radio1 input[name='optRadio']").click(function(event) {$("#code").load("/code/origBBS.html");
+                                                                  $("#grafico").load("/code/InfoBB.html")});
+        $("#radio2 input[name='optRadio']").click(function(event) {$("#code").load("/code/ins/origBBS.html");
+                                                                  $("#grafico").load("/code/infoINS.html")});
+        $("#radio3 input[name='optRadio']").click(function(event) {$("#code").load("/code/ss/origBBS.html");
+                                                                  $("#grafico").load("/code/infoSS.html")});
+    </script>
+    </body>
+</html>
